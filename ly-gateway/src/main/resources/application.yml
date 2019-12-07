@@ -3,12 +3,14 @@ server:
 spring:
   application:
     name: ly-gateway
-eureke:
+eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
 zuul:
   prefix: /api #添加路由前缀
+  routes:
+    item-service: /item/**
 hystrix:
   command:
     default:

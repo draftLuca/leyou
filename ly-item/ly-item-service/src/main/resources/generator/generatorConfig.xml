@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--   <classPathEntry location="E:/.m2/repository/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar" /> -->
+    <!--   <properties resource="properties/development.properties"/> -->
+    <!--<properties resource="generator/config.properties"/>-->
+
+    <!-- 数据库连接配置文件 -->
+<!--    <properties resource="application.yml" />-->
+
+    <context id="Mysql" targetRuntime="MyBatis3">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <!-- 生成的pojo，将implements Serializable-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库链接URL、用户名、密码（这个就是你的spring boot项目自带的那个配置文件里面的数据库的配置） -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/yun6?serverTimezone=UTC"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+        <!--
+            生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径,如./src/main/java，
+            也可以使用“MAVEN”来自动生成，这样生成的代码会在target/generatord-source目录下<br>　　　　　　　（通俗的讲就是你想要把生成的实体类的放到哪里）
+        -->
+        <javaModelGenerator targetPackage="com.leyou.po" targetProject="src/main/java"/>
+        <!--对应的mapper.xml文件（通俗的讲就是你要把mapper.xml文件放到什么地方去，我是放到resource下一个名叫mappers的文件夹里面了）  -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <!-- 对应的Mapper接口类文件 （通俗的讲就是你要生成的稻城mapper接口的地方 需要根据自己的文件进行配置） -->
+        <javaClientGenerator targetPackage="com.leyou.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <!--对应的表-->
+
+        <table tableName="tb_brand">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_category">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_category_brand">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_coupon">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_order">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_order_detail">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+
+</generatorConfiguration>
+
+
